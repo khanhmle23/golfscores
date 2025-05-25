@@ -162,7 +162,6 @@ st.markdown("""
 - Give me a summary of skins for round 1.
 - Give me a summary of front 9 net scores for round 1?
 - Give me a summary of back 9 net scores for round 1?
-- Give me a summary for Birdies by round.
 - Give me a summary of who got Birdies by round.
 - Give me a summary of player total net scores for round 1.
 - What score did John get for hole 1 round 1?
