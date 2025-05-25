@@ -153,19 +153,19 @@ def ask_gpt(query, context_text):
     return response.choices[0].message.content
 
 # --- Streamlit UI ---
-st.title("Golf Trip Scoring Assistant")
+st.title("Drunk Myrtle Golf Trip Scoring Assistant")
 st.markdown(f"**Dataset:** `{dataset_path}`")
 
 # Add a label with sample prompts/tips for users
 st.markdown("""
-**💡 Sample Prompts:**
-- What score did John get for hole 1 round 1? 
+**💡 Sample Prompts:** 
 - Give me a summary of skins for round 1.
 - Give me a summary of front 9 net scores for round 1?
 - Give me a summary of back 9 net scores for round 1?
 - Give me a summary for Birdies by round.
 - Give me a summary of who got Birdies by round.
 - Give me a summary of player total net scores for round 1.
+- What score did John get for hole 1 round 1?
 - Danh and TJ are Team A, Orlando and Dai are Team B, Eric and Bryce are Team C, Mario and Ryan are Team D, Vuong and Wynn are Team E, Phillip and John are Team F, Jay and Tom are Team G.  Give me a summary of all team scores for front 9 round 1.
 """)
 
