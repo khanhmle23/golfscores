@@ -152,6 +152,23 @@ def ask_gpt(query, context_text):
     )
     return response.choices[0].message.content
 
+def build_hole_by_hole_table(chunks):
+    # Find the max number of holes (usually 18)
+    all_holes = sorted({hole for chunk in chunks for hole in chunk.get('scores', {}).keys()}, key=lambda h: int(h.split()[-1]))
+    headers = ["Player", "Round"] + all_holes
+    header_row = " | ".join(h.ljust(8) for h in headers)
+    lines = [header_row, "-" * len(header_row)]
+    for chunk in chunks:
+        row = [
+            str(chunk['player']).ljust(8),
+            str(chunk['round']).ljust(8)
+        ]
+        for hole in all_holes:
+            score = chunk.get('scores', {}).get(hole, "")
+            row.append(str(score).ljust(8))
+        lines.append(" | ".join(row))
+    return "\n".join(lines)
+
 # --- Streamlit UI ---
 st.title("Drunk Myrtle Golf Trip Scoring Assistant")
 st.markdown(f"**Dataset:** `{dataset_path}`")
@@ -175,6 +192,14 @@ summary_table = build_summary_table(chunks)
 if show_summary:
     st.subheader("📊 All Players Summary Table")
     st.code(summary_table)
+
+# Add a toggle to show/hide the hole-by-hole table
+show_hole_table = st.checkbox("Show All Players Hole-by-Hole Table", value=False)
+
+hole_table = build_hole_by_hole_table(chunks)
+if show_hole_table:
+    st.subheader("⛳ All Players Hole-by-Hole Table")
+    st.code(hole_table)
 
 question = st.text_input("Ask a golf question:")
 
